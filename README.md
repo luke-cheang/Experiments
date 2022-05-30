@@ -1,3 +1,3 @@
-My experimental projects.
-=========================
-1. This is the repository for experimental projects.
+# My Experiments
+## vs2017 - MS Visual Studio 2017
+### ASPNET_WEBFORM - Web Site using ASP.NET Web Form
