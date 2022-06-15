@@ -58,10 +58,19 @@
     <Compile Include="ConnStrBuilder.Designer.cs">
       <DependentUpon>ConnStrBuilder.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditProperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditProperty.Designer.cs">
+      <DependentUpon>EditProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ConnStrBuilder.resx">
       <DependentUpon>ConnStrBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditProperty.resx">
+      <DependentUpon>EditProperty.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

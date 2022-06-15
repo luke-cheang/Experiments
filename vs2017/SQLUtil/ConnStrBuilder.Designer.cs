@@ -35,6 +35,8 @@
             this.colKey = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txtConnStrResult = new System.Windows.Forms.TextBox();
+            this.btnGenerate = new System.Windows.Forms.Button();
+            this.colNo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lbConnStr
@@ -43,7 +45,7 @@
             this.lbConnStr.Location = new System.Drawing.Point(11, 9);
             this.lbConnStr.Name = "lbConnStr";
             this.lbConnStr.Size = new System.Drawing.Size(93, 12);
-            this.lbConnStr.TabIndex = 0;
+            this.lbConnStr.TabIndex = 1;
             this.lbConnStr.Text = "Connection String:";
             // 
             // txtConnStr
@@ -51,7 +53,7 @@
             this.txtConnStr.Location = new System.Drawing.Point(11, 25);
             this.txtConnStr.Name = "txtConnStr";
             this.txtConnStr.Size = new System.Drawing.Size(774, 22);
-            this.txtConnStr.TabIndex = 1;
+            this.txtConnStr.TabIndex = 2;
             this.txtConnStr.TextChanged += new System.EventHandler(this.txtConnStr_TextChanged);
             // 
             // btnParseConnStr
@@ -59,7 +61,7 @@
             this.btnParseConnStr.Location = new System.Drawing.Point(11, 51);
             this.btnParseConnStr.Name = "btnParseConnStr";
             this.btnParseConnStr.Size = new System.Drawing.Size(75, 23);
-            this.btnParseConnStr.TabIndex = 2;
+            this.btnParseConnStr.TabIndex = 3;
             this.btnParseConnStr.Text = "Parse";
             this.btnParseConnStr.UseVisualStyleBackColor = true;
             this.btnParseConnStr.Click += new System.EventHandler(this.btnParseConnStr_Click);
@@ -67,18 +69,20 @@
             // lvConnStrKeys
             // 
             this.lvConnStrKeys.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colNo,
             this.colKey,
             this.colValue});
             this.lvConnStrKeys.FullRowSelect = true;
             this.lvConnStrKeys.GridLines = true;
             this.lvConnStrKeys.HideSelection = false;
-            this.lvConnStrKeys.Location = new System.Drawing.Point(11, 105);
+            this.lvConnStrKeys.Location = new System.Drawing.Point(11, 77);
             this.lvConnStrKeys.MultiSelect = false;
             this.lvConnStrKeys.Name = "lvConnStrKeys";
-            this.lvConnStrKeys.Size = new System.Drawing.Size(774, 328);
-            this.lvConnStrKeys.TabIndex = 3;
+            this.lvConnStrKeys.Size = new System.Drawing.Size(774, 292);
+            this.lvConnStrKeys.TabIndex = 4;
             this.lvConnStrKeys.UseCompatibleStateImageBehavior = false;
             this.lvConnStrKeys.View = System.Windows.Forms.View.Details;
+            this.lvConnStrKeys.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvConnStrKeys_MouseDoubleClick);
             // 
             // colKey
             // 
@@ -90,17 +94,32 @@
             // 
             // txtConnStrResult
             // 
-            this.txtConnStrResult.Location = new System.Drawing.Point(11, 77);
+            this.txtConnStrResult.Location = new System.Drawing.Point(11, 401);
             this.txtConnStrResult.Name = "txtConnStrResult";
             this.txtConnStrResult.ReadOnly = true;
             this.txtConnStrResult.Size = new System.Drawing.Size(772, 22);
-            this.txtConnStrResult.TabIndex = 4;
+            this.txtConnStrResult.TabIndex = 6;
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.Location = new System.Drawing.Point(11, 375);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerate.TabIndex = 5;
+            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
+            // colNo
+            // 
+            this.colNo.Text = "No";
             // 
             // ConnStrBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 456);
+            this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.txtConnStrResult);
             this.Controls.Add(this.lvConnStrKeys);
             this.Controls.Add(this.btnParseConnStr);
@@ -123,6 +142,8 @@
         private System.Windows.Forms.ColumnHeader colKey;
         private System.Windows.Forms.ColumnHeader colValue;
         private System.Windows.Forms.TextBox txtConnStrResult;
+        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.ColumnHeader colNo;
     }
 }
 
