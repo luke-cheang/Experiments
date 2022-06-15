@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -58,7 +59,11 @@ namespace SQLUtil
         /// <param name="e"></param>
         private void ConnStrBuilder_Load(object sender, EventArgs e)
         {
+            String connStr = ConfigurationManager.AppSettings["ConnStr"];
+
             btnParseConnStr.Enabled = false;
+            if (!String.IsNullOrWhiteSpace(connStr))
+                txtConnStr.Text = connStr.Trim();
         }   // ConnStrBuilder_Load();
 
         /// <summary>
