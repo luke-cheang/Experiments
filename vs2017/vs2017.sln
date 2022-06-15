@@ -5,6 +5,13 @@ VisualStudioVersion = 15.0.28307.960
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNET_WEBFORM", "ASPNET_WEBFORM\ASPNET_WEBFORM.csproj", "{BDF76D86-85C4-4729-9041-4B8EF352DD74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLUtil", "SQLUtil\SQLUtil.csproj", "{CFB2F091-CD96-4F07-9EB2-BC34B303EECB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2EAEFA06-9AFB-4111-A8C9-D36956C79043}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{BDF76D86-85C4-4729-9041-4B8EF352DD74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDF76D86-85C4-4729-9041-4B8EF352DD74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDF76D86-85C4-4729-9041-4B8EF352DD74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB2F091-CD96-4F07-9EB2-BC34B303EECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB2F091-CD96-4F07-9EB2-BC34B303EECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB2F091-CD96-4F07-9EB2-BC34B303EECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB2F091-CD96-4F07-9EB2-BC34B303EECB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
