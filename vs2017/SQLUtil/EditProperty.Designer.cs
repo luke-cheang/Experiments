@@ -80,8 +80,10 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.txtValue);
             this.Controls.Add(this.lbKey);
+            this.KeyPreview = true;
             this.Name = "EditProperty";
             this.Text = "EditProperty";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EditProperty_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Common.Utility;
+
 namespace SQLUtil
 {
     public partial class ConnStrBuilder : Form
@@ -59,7 +61,6 @@ namespace SQLUtil
             txtConnStrResult.Clear();
             txtPlainPassword.Clear();
             txtBase64Password.Clear();
-            txtConnectionResult.Clear();
         }   // Clear_OutputStrings();
 
         /// <summary>
@@ -73,6 +74,7 @@ namespace SQLUtil
 
             btnParseConnStr.Enabled = false;
             btnTestConnection.Enabled = false;
+            btnExport2Ini.Enabled = false;
             if (!String.IsNullOrWhiteSpace(connStr))
                 txtConnStr.Text = connStr.Trim();
         }   // ConnStrBuilder_Load();
@@ -101,7 +103,7 @@ namespace SQLUtil
         private void btnParseConnStr_Click(object sender, EventArgs e)
         {
             String s = String.Empty;
-
+            Debug.WriteLine("btnParseConnStr_Click()");
             try
             {
                 s = txtConnStr.Text.Trim();
@@ -136,7 +138,7 @@ namespace SQLUtil
                     // 要把密碼分離出來。
                     String pswd = _sqlConnStrBuilder.Password;
                     // 先產生沒有密碼的連線字串。
-                    _sqlConnStrBuilder.Password = String.Empty;
+                    _sqlConnStrBuilder.Remove("Password");
                     txtConnStrResult.Text = _sqlConnStrBuilder.ConnectionString;
                     // 產生明碼的密碼及換成Base64的密碼。
                     txtPlainPassword.Text = pswd;
@@ -163,8 +165,12 @@ namespace SQLUtil
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// <remarks>
+        /// 編輯_sqlConnStrBuilder的設定值。
+        /// </remarks>
         private void lvConnStrKeys_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            Debug.WriteLine("lvConnStrKeys_MouseDoubleClick()");
             try
             {
                 ListViewHitTestInfo hitTestInfo = lvConnStrKeys.HitTest(e.X, e.Y);
@@ -174,18 +180,69 @@ namespace SQLUtil
                     Debug.Print("lvConnStrkeys[" + key + "] double-clicked");
                     switch (key)
                     {
+                        // 內容為字串的設定值。
+                        #region String_Params
+                        case "Data Source":
+                        case "Initial Catalog":
+                        case "User ID":
                         case "Password":
+                        case "Network Library":
+                            // 用EditProperty來編輯字串。
                             EditProperty form = new EditProperty();
-                            bool brc = form.Execute(key, _sqlConnStrBuilder.Password, out String s);
+                            bool brc = form.Execute(key, _sqlConnStrBuilder[key].ToString(), out String s);
                             if (brc)
                             {
-                                _sqlConnStrBuilder.Password = s.Trim();
+                                _sqlConnStrBuilder[key] = s.Trim();
                                 Refresh_BuilderProperties();
                             }
                             break;
+                        #endregion  // String_Params
+
+                        // 內容為T/F的設定值。
+                        #region Bool_Params
+                        case "Integrated Security":
+                        case "Persist Security Info":
+                        case "MultiSubnetFailover":
+                            break;
+                        #endregion  // Bool_Params
+
+                        // 還未處理的設定值。
+                        #region Unknown_Params
+                        case "Failover Partner":
+                        case "AttachDbFilename":
+                        case "Enlist":
+                        case "Pooling":
+                        case "Min Pool Size":
+                        case "Max Pool Size":
+                        case "PoolBlockingPeriod":
+                        case "Asynchronous Processing":
+                        case "Connection Reset":
+                        case "MultipleActiveResultSets":
+                        case "Replication":
+                        case "Connect Timeout":
+                        case "Encrypt":
+                        case "TrustServerCertificate":
+                        case "Load Balance Timeout":
+                        case "Packet Size":
+                        case "Type System Version":
+                        case "Authentication":
+                        case "Application Name":
+                        case "Current Language":
+                        case "Workstation ID":
+                        case "User Instance":
+                        case "Context Connection":
+                        case "Transaction Binding":
+                        case "ApplicationIntent":
+                        case "TransparentNetworkIPResolution":
+                        case "ConnectRetryCount":
+                        case "ConnectRetryInterval":
+                        case "Column Encryption Setting":
+                        case "Enclave Attestation Url":
                         default:
                             break;
-                    }
+                        #endregion  // Unknown_Params
+
+                    }   // switch (key)
                 }
             }
             catch (Exception ex)
@@ -193,7 +250,7 @@ namespace SQLUtil
                 string msg = Common.GetExceptionString(ex);
                 MessageBox.Show(msg, "Edit ConnStr Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }   // lvConnStrKeys_MouseDoubleClick();
 
         /// <summary>
         /// Event handler for TextChanged event of txtConnStrResult.
@@ -203,9 +260,15 @@ namespace SQLUtil
         private void txtConnStrResult_TextChanged(object sender, EventArgs e)
         {
             if (!String.IsNullOrWhiteSpace(txtConnStrResult.Text))
+            {
                 btnTestConnection.Enabled = true;
+                btnExport2Ini.Enabled = true;
+            }
             else
+            {
                 btnTestConnection.Enabled = false;
+                btnExport2Ini.Enabled = false;
+            }
         }   // txtConnStrResult_TextChanged();
 
         /// <summary>
@@ -218,8 +281,86 @@ namespace SQLUtil
         /// </remarks>
         private void btnTestConnection_Click(object sender, EventArgs e)
         {
-            txtConnectionResult.Clear();
+            Debug.WriteLine("btnTestConnection_Click()");
+            using (SqlConnection cnn = new SqlConnection())
+            {
+                // 組成完整的連線字串。
+                String cnn_str = txtConnStrResult.Text.Trim();
+                if (!String.IsNullOrWhiteSpace(txtBase64Password.Text))
+                {
+                    // 把Base64轉回一般文字。
+                    Byte[] pswd_byte = Convert.FromBase64String(txtBase64Password.Text.Trim());
+                    String pswd_str = Encoding.ASCII.GetString(pswd_byte).Trim();
 
+                    // 最後固定用雙引號把密碼括起來加入至連線字串。
+                    cnn_str += ";Password=" + "\"" + pswd_str + "\"" + ";";
+                }
+                // 嘗試連線。
+                try
+                {
+                    Debug.WriteLine("cnn_str=[" + cnn_str + "]");
+                    cnn.ConnectionString = cnn_str;
+                    cnn.Open();
+                    MessageBox.Show(
+                        "Connect to\n\n" + cnn_str + "\n\nSuccess",
+                        "Test Conneciton",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.None);
+                    cnn.Close();
+                }
+                catch (Exception ex)
+                {
+                    string msg = Common.GetExceptionString(ex);
+                    MessageBox.Show(
+                        "Connect to\n\n" + cnn_str + "\n\nFail\n\n" + msg,
+                        "Test Conneciton",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }   // btnTestConnection_Click();
+
+        /// <summary>
+        /// Event handler for Click event of btnExport2Ini.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <remarks>
+        /// 把連線字串資料寫到INI檔。
+        /// </remarks>
+        private void btnExport2Ini_Click(object sender, EventArgs e)
+        {
+            Debug.Write("btnExport_Click()");
+            saveFileDialog1.ShowHelp = false;
+            saveFileDialog1.CheckPathExists = true;
+            saveFileDialog1.CreatePrompt = true;
+            saveFileDialog1.OverwritePrompt = true;
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.DefaultExt = "ini";
+            saveFileDialog1.Filter = "Ini files (*.ini)|*.ini|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 1;
+            DialogResult dr = saveFileDialog1.ShowDialog();
+            if (DialogResult.OK == dr)
+            {
+                Debug.WriteLine("Export connection string to [" + saveFileDialog1.FileName + "]");
+                try
+                {
+                    IniFile iniFile = new IniFile(saveFileDialog1.FileName);
+                    iniFile.SetString("DBInfo", "ConnStr", txtConnStrResult.Text);
+                    iniFile.SetString("DBInfo", "EncodedPswd", txtBase64Password.Text);
+
+                    MessageBox.Show(
+                        "Exported to [" + iniFile.Filename + "]", 
+                        "Export to INI", 
+                        MessageBoxButtons.OK, 
+                        MessageBoxIcon.None);
+                }
+                catch (Exception ex)
+                {
+                    string msg = Common.GetExceptionString(ex);
+                    MessageBox.Show(msg, "Export to INI Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
     }   // ConnStrBuilder

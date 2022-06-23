@@ -44,8 +44,8 @@
             this.lbBase64Password = new System.Windows.Forms.Label();
             this.chkSeparatePassword = new System.Windows.Forms.CheckBox();
             this.btnTestConnection = new System.Windows.Forms.Button();
-            this.lbConnectionResult = new System.Windows.Forms.Label();
-            this.txtConnectionResult = new System.Windows.Forms.TextBox();
+            this.btnExport2Ini = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // lbOrgConnStr
@@ -187,30 +187,22 @@
             this.btnTestConnection.UseVisualStyleBackColor = true;
             this.btnTestConnection.Click += new System.EventHandler(this.btnTestConnection_Click);
             // 
-            // lbConnectionResult
+            // btnExport2Ini
             // 
-            this.lbConnectionResult.AutoSize = true;
-            this.lbConnectionResult.Location = new System.Drawing.Point(115, 506);
-            this.lbConnectionResult.Name = "lbConnectionResult";
-            this.lbConnectionResult.Size = new System.Drawing.Size(59, 12);
-            this.lbConnectionResult.TabIndex = 14;
-            this.lbConnectionResult.Text = "Test Result:";
-            // 
-            // txtConnectionResult
-            // 
-            this.txtConnectionResult.Location = new System.Drawing.Point(181, 502);
-            this.txtConnectionResult.Name = "txtConnectionResult";
-            this.txtConnectionResult.ReadOnly = true;
-            this.txtConnectionResult.Size = new System.Drawing.Size(604, 22);
-            this.txtConnectionResult.TabIndex = 15;
+            this.btnExport2Ini.Location = new System.Drawing.Point(121, 501);
+            this.btnExport2Ini.Name = "btnExport2Ini";
+            this.btnExport2Ini.Size = new System.Drawing.Size(100, 23);
+            this.btnExport2Ini.TabIndex = 14;
+            this.btnExport2Ini.Text = "Export to INI";
+            this.btnExport2Ini.UseVisualStyleBackColor = true;
+            this.btnExport2Ini.Click += new System.EventHandler(this.btnExport2Ini_Click);
             // 
             // ConnStrBuilder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 541);
-            this.Controls.Add(this.txtConnectionResult);
-            this.Controls.Add(this.lbConnectionResult);
+            this.Controls.Add(this.btnExport2Ini);
             this.Controls.Add(this.btnTestConnection);
             this.Controls.Add(this.chkSeparatePassword);
             this.Controls.Add(this.lbBase64Password);
@@ -250,8 +242,8 @@
         private System.Windows.Forms.Label lbBase64Password;
         private System.Windows.Forms.CheckBox chkSeparatePassword;
         private System.Windows.Forms.Button btnTestConnection;
-        private System.Windows.Forms.Label lbConnectionResult;
-        private System.Windows.Forms.TextBox txtConnectionResult;
+        private System.Windows.Forms.Button btnExport2Ini;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 

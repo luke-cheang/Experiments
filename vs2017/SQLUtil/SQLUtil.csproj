@@ -51,6 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\common\IniFile.cs">
+      <Link>IniFile.cs</Link>
+    </Compile>
     <Compile Include="Common.cs" />
     <Compile Include="ConnStrBuilder.cs">
       <SubType>Form</SubType>
