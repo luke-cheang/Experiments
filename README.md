@@ -3,4 +3,7 @@
 ### ASPNET_WEBFORM - Web Site using ASP.NET Web Form
 ### SQLUtil - Utilities used with MS-SQL Server
 1. SQL Connection String Builder
+### Base64 - C/C++ Base64.
+1. C/C++ class Base64, provides Base64 encoding/decoding.
+1. Console program for the testing of Base64.
 ## vs2010 - MS Visual Studio 2010
