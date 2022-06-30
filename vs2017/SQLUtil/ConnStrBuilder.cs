@@ -291,9 +291,12 @@ namespace SQLUtil
                     // 把Base64轉回一般文字。
                     Byte[] pswd_byte = Convert.FromBase64String(txtBase64Password.Text.Trim());
                     String pswd_str = Encoding.ASCII.GetString(pswd_byte).Trim();
-
-                    // 最後固定用雙引號把密碼括起來加入至連線字串。
-                    cnn_str += ";Password=" + "\"" + pswd_str + "\"" + ";";
+                    // 把密碼加入至連線字串。
+                    if (!cnn_str.EndsWith(";"))
+                        cnn_str += ";";
+                    // 如果密碼當中有雙引號，要換成兩個雙引號；
+                    // 然後固定用雙引號把密碼括起來加入至連線字串。
+                    cnn_str += "Password=" + "\"" + pswd_str.Replace("\"", "\"\"") + "\"" + ";";
                 }
                 // 嘗試連線。
                 try
