@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Base64", "Base64\Base64.vcxproj", "{C915FA39-229B-4CC4-BA31-7CAEC6D175D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Base64Tester", "Base64Tester\Base64Tester.csproj", "{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,18 @@ Global
 		{C915FA39-229B-4CC4-BA31-7CAEC6D175D7}.Release|x64.Build.0 = Release|x64
 		{C915FA39-229B-4CC4-BA31-7CAEC6D175D7}.Release|x86.ActiveCfg = Release|Win32
 		{C915FA39-229B-4CC4-BA31-7CAEC6D175D7}.Release|x86.Build.0 = Release|Win32
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|x64.Build.0 = Release|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE4D6292-816A-4BDA-96AF-E93CDC40EB19}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
