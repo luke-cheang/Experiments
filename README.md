@@ -9,6 +9,12 @@
 1. Console program for the testing of Base64.
 ### Base64Tester - Utility for verification of Base64 encoding and decoding.
 1. C# WinForm application.
+### Zip1
+1. C# WinForm application.
+1. Ionic.Zip sample.
+### Zip2
+1. C# WinForm application.
+1. DotNetZip sample.
 ## vs2010 - MS Visual Studio 2010
 ## bcb6 - Borland C++ Builder 6
 ### WinForm
