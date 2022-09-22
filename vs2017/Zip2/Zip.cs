@@ -23,12 +23,11 @@ namespace Zip2
             bool brc = false;
             string trgFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(zipFilename));
 
-            ZipFile trgZip = ZipFile.Read(zipFilename);
             Debug.WriteLine("Extract all files to [" + trgFolder + "]");
-            if (!Directory.Exists(trgFolder))
-                Directory.CreateDirectory(trgFolder);
-            else
+            if (Directory.Exists(trgFolder))
                 Directory.Delete(trgFolder, true);  // 先刪掉暂存目錄及檔案。
+            Directory.CreateDirectory(trgFolder);   // 再產生新的暫存目錄。
+            ZipFile trgZip = ZipFile.Read(zipFilename);
             trgZip.ExtractAll(trgFolder, ExtractExistingFileAction.OverwriteSilently);
             string[] lstFiles = Directory.GetFiles(trgFolder);
             Debug.WriteLine("Total " + lstFiles.Length.ToString() + " file(s) extracted");
