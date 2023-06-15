@@ -6,7 +6,7 @@ using System.Web;
 
 using NLog;
 
-namespace ASPNET_WEBFORM.Modules
+namespace MVCApp.Modules
 {
     public static class Common
     {
@@ -72,4 +72,4 @@ namespace ASPNET_WEBFORM.Modules
 
     }   // Common
 
-}   // ASPNET_WEBFORM.Modules
+}   // MVCApp.Modules
